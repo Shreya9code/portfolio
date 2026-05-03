@@ -22,12 +22,14 @@ export default function TagCloud3D({
   const containerRef = useRef<HTMLDivElement>(null);
   const [rotation, setRotation] = useState({ x: 0, y: 0 });
   const [isHovering, setIsHovering] = useState(false);
-  const animationRef = useRef<number>();
+  
+  // ✅ Fixed: Added initial value and nullable type
+  const animationRef = useRef<number | null>(null);
 
   // Generate sphere positions using Fibonacci sphere algorithm
   const generatePositions = (count: number, r: number) => {
     const positions: { x: number; y: number; z: number; scale: number }[] = [];
-    const phi = Math.PI * (3 - Math.sqrt(5)); // Golden angle
+    const phi = Math.PI * (3 - Math.sqrt(5));
 
     for (let i = 0; i < count; i++) {
       const y = 1 - (i / (count - 1)) * 2;
@@ -41,7 +43,7 @@ export default function TagCloud3D({
         x: x * r,
         y: y * r,
         z: z * r,
-        scale: 0.5 + (z + r) / (2 * r) * 0.5 // Scale based on depth
+        scale: 0.5 + (z + r) / (2 * r) * 0.5
       });
     }
     return positions;
@@ -62,6 +64,7 @@ export default function TagCloud3D({
     };
 
     animationRef.current = requestAnimationFrame(animate);
+    
     return () => {
       if (animationRef.current) {
         cancelAnimationFrame(animationRef.current);
@@ -103,6 +106,7 @@ export default function TagCloud3D({
           rotateY: rotation.y 
         }}
         transition={{ type: 'spring', stiffness: 50, damping: 30 }}
+        suppressHydrationWarning={true}
       >
         {tags.map((tag, index) => {
           const pos = positions[index];
@@ -110,21 +114,21 @@ export default function TagCloud3D({
           
           return (
             <motion.div
-  key={tag.text}
-  className="absolute px-3 py-1.5 rounded-full border border-border/50 bg-card/80 backdrop-blur-sm text-xs font-medium whitespace-nowrap select-none hover:border-primary/50 hover:bg-card-hover transition-all duration-200"
-  style={{
-    transform: `translate3d(${pos.x}px, ${pos.y}px, ${pos.z}px) scale(${pos.scale})`,
-    zIndex: Math.round(pos.z + radius)
-  }}
-  whileHover={{ 
-    scale: pos.scale! * 1.2,
-    borderColor: 'rgba(255,255,255,0.3)',
-    backgroundColor: 'rgba(30,30,30,0.9)'
-  }}
-  suppressHydrationWarning={true}  // ✅ Add this line
->
-  {tag.text}
-</motion.div>
+              key={tag.text}
+              className="absolute px-3 py-1.5 rounded-full border border-border/50 bg-card/80 backdrop-blur-sm text-xs font-medium whitespace-nowrap select-none hover:border-primary/50 hover:bg-card-hover transition-all duration-200"
+              style={{
+                transform: `translate3d(${pos.x}px, ${pos.y}px, ${pos.z}px) scale(${pos.scale})`,
+                zIndex: Math.round(pos.z + radius)
+              }}
+              whileHover={{ 
+                scale: pos.scale! * 1.2,
+                borderColor: 'rgba(255,255,255,0.3)',
+                backgroundColor: 'rgba(30,30,30,0.9)'
+              }}
+              suppressHydrationWarning={true}
+            >
+              {tag.text}
+            </motion.div>
           );
         })}
       </motion.div>
