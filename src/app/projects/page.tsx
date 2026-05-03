@@ -58,7 +58,16 @@ const projects = [
     github: 'https://github.com/sahelikundu22/Auralix.ai_H4B4.0',
     demo: 'https://youtu.be/b38ItkhMtxQ',
     featured: false
-  }
+  },
+  {
+    title: 'Finance Dashboard',
+    description: 'AI-powered e-waste management platform connecting sellers, buyers, and recyclers with QR-based lifecycle tracking.',
+    image: '/projects/greencircuit.png',
+    tech: ['React.js', 'Node.js', 'MongoDB', 'Gemini API', 'OSM Maps'],
+    github: 'https://github.com/Shreya9code/Zorvyn-finance-dashboard',
+    live: 'https://finance-dashboard-olive-nine.vercel.app/',
+    featured: false
+  },
 ];
 
 const quote = {

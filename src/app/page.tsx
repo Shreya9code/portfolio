@@ -3,6 +3,7 @@ import Skills from './sections/Skills';
 import Contact from './sections/Contact';
 import About from './sections/About';
 import FeaturedProjects from './sections/FeaturedProjects';
+import FeaturedCertifications from './sections/FeaturedCertifications.tsx';
 
 export default function Home() {
   return (
@@ -11,6 +12,7 @@ export default function Home() {
       <About /> 
       <Skills />
       <FeaturedProjects />
+      <FeaturedCertifications />
       <Contact />
     </main>
   );

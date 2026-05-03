@@ -28,6 +28,7 @@ export default function RootLayout({
             <div className="hidden md:flex gap-8 text-sm text-secondary">
               <Link href="#about" className="hover:text-foreground transition-colors">About</Link>
               <Link href="/projects" className="hover:text-foreground transition-colors">Projects</Link>
+              <Link href="/certifications" className="hover:text-foreground transition-colors">Certifications</Link>
               <Link href="#contact" className="hover:text-foreground transition-colors">Contact</Link>
             </div>
 
